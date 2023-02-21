@@ -1,0 +1,69 @@
+{% extends "index.html" %}
+
+{% block title %}
+    AppCoder - Listado de {% if users %}Usuarios{% elif warehouses %}Depósitos{% endif %}
+{% endblock %}
+
+{% block content %}
+    </table>
+    {% if users %}
+        <h1>Usuarios</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Link a Detalle</th>
+                </tr>
+            </thead>
+        <!-- <td></td> -->
+        {% for user in users %}
+            <tr>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td><a class="btn btn-primary btn-sm" role="button" href="/users/details/{{ user.id }}">Ir a Detalle</a></td>
+            </tr>
+        {% endfor %}
+    {% elif warehouses %}
+        <h1>Depósitos</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Alias</th>
+                    <th>Capacidad</th>
+                    <th>Link a Detalle</th>
+                </tr>
+            </thead>
+        <!-- <td></td> -->
+        {% for wh in warehouses %}
+            <tr>
+                <td>{{ wh.alias }}</td>
+                <td>{{ wh.capacity_in_m3 }}</td>
+                <td><a class="btn btn-primary btn-sm" role="button" href="/warehouses/details/{{ wh.id }}">Ir a Detalle</a></td>
+            </tr>
+        {% endfor %}
+    {% elif products %}
+        <h1>Productos</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Link a Detalle</th>
+                </tr>
+            </thead>
+        <!-- <td></td> -->
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>ARS {{ product.price }}</td>
+                <td><a class="btn btn-primary btn-sm" role="button" href="/products/details/{{ product.id }}">Ir a Detalle</a></td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <div class="alert alert-primary" role="alert">
+            Todavía no hay nada cargado
+        </div>
+    {% endif %}
+    </table>
+{% endblock %}

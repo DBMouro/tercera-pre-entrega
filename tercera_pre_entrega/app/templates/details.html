@@ -1,0 +1,64 @@
+{% extends "index.html" %}
+
+{% block title %}
+    AppCoder - Detalles de {% if user.id %}Usuario {{ user.first_name }} {{ user.last_name }}{% elif warehouse.id %}Depósito {{ warehouse.alias }}{% endif %}
+{% endblock %}
+{% block content %}
+    </table>
+    {% if user.id %}
+        <h1>Usuario - {{ user.first_name }} {{ user.last_name}}</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Edad</th>
+                    <th>Fecha de Registro</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>{{ user.first_name }}</td>
+                <td>{{ user.last_name }}</td>
+                <td>{{ user.age }}</td>
+                <td>{{ user.joined_date }}</td>
+            </tr>
+            <tr><td><a class="btn btn-success" href="/users/" role="button">Volver</a></td></tr>
+    {% endif %}
+    {% if warehouse.id %}
+        <h1>Depósito - {{ warehouse.alias }}</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Alias</th>
+                    <th>Ubicación</th>
+                    <th>Capacidad en M<sup>3</sup></th>
+                    <th>Sistema de Refrigeración</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>{{ warehouse.alias }}</td>
+                <td>{{ warehouse.location }}</td>
+                <td>{{ warehouse.capacity_in_m3 }}</td>
+                <td>{% if warehouse.cooling_system %}Sí{% else %}No {% endif %}</td>
+            </tr>
+            <tr><td><a class="btn btn-success" href="/warehouses/" role="button">Volver</a></td></tr>
+    {% endif %}
+    {% if product.id %}
+        <h1>Producto - {{ product.name }}</h1>
+        <table class="table table-striped" id="sortTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Categoría</th>
+                    <th>Precio</th>
+                    </tr>
+            </thead>
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.category }}</td>
+                <td>{{ product.price }}</td>
+            </tr>
+            <tr><td><a class="btn btn-success" href="/products/" role="button">Volver</a></td></tr>
+    {% endif %}
+    </table>
+{% endblock %}
